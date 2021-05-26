@@ -74,6 +74,7 @@ WSGI_APPLICATION = 'DjangoRestFramework.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# TODO настроить на postgre 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
