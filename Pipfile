@@ -9,6 +9,8 @@ icecream = "*"
 djangorestframework = "*"
 django-filter = "*"
 markdown = "*"
+toml = "*"
+mimesis = "*"
 
 [dev-packages]
 
