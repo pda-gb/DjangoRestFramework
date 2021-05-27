@@ -11,6 +11,7 @@ django-filter = "*"
 markdown = "*"
 toml = "*"
 mimesis = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

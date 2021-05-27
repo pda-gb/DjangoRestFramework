@@ -77,9 +77,17 @@ WSGI_APPLICATION = 'DjangoRestFramework.wsgi.application'
 
 # TODO настроить на postgre 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": secret_value["DATABASE_NAME"],
+        "USER": secret_value["DATABASE_USER"],
+        "PASSWORD": secret_value["DATABASE_PASSWORD"],
+        # "HOST": secret_value["DATABASE_HOST"],
+        # "PORT": secret_value["DATABASE_PORT"],
     }
 }
 
