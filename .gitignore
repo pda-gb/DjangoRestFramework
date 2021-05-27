@@ -476,5 +476,6 @@ out
 gen
 # ======================================
 /secret.json
+/secret.toml
 migrations/
 tmp/

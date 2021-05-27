@@ -14,10 +14,12 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import toml
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-with open(BASE_DIR.joinpath("secret.json"), "r") as secret_file:
-    secret_value = json.load(secret_file)
+with open(BASE_DIR.joinpath("secret.toml"), "r") as secret_file:
+    secret_value = toml.load(secret_file)
 
 SECRET_KEY = secret_value["SECRET_KEY"]
 
@@ -75,7 +77,6 @@ WSGI_APPLICATION = 'DjangoRestFramework.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# TODO настроить на postgre 
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
@@ -112,9 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = secret_value.get('LANGUAGE', 'en-en')
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = secret_value.get('TIME', 'UTC')
 
 USE_I18N = True
 
