@@ -1,0 +1,25 @@
+[default]
+
+DEBUG = true
+DATABASES__default__ENGINE = "django.db.backends.postgresql_psycopg2"
+DATABASES__default__NAME = ""
+DATABASES__default__USER = ""
+DATABASES__default__PASSWORD = ""
+DATABASES__default__ATOMIC_REQUESTS = false
+DATABASES__default__AUTOCOMMIT = true
+DATABASES__default__CONN_MAX_AGE = 0
+LANGUAGE_CODE = "ru-ru"
+TIME_ZONE = "UTC"
+ALLOWED_HOSTS = ["*"]
+STATIC_URL = '/static/'
+USE_I18N = true
+USE_L10N = true
+USE_TZ = true
+
+[development]
+
+TIME_ZONE = "Europe/Moscow"
+
+[production]
+
+DEBUG = false

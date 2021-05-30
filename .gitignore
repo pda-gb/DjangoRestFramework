@@ -475,7 +475,8 @@ pip-selfcheck.json
 out
 gen
 # ======================================
-/secret.json
-/secret.toml
 migrations/
 tmp/
+
+# Ignore dynaconf secret files
+config/.secrets.toml

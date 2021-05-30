@@ -9,25 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import json
 import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-import toml
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-with open(BASE_DIR.joinpath("secret.toml"), "r") as secret_file:
-    secret_value = toml.load(secret_file)
-
-SECRET_KEY = secret_value["SECRET_KEY"]
-
-DEBUG = secret_value.get("DEBUG", True)
-
-ALLOWED_HOSTS = ["*"]
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -58,8 +43,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, ]
-        ,
+        'DIRS': [TEMPLATE_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,24 +57,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'DjangoRestFramework.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": secret_value["DATABASE_NAME"],
-        "USER": secret_value["DATABASE_USER"],
-        "PASSWORD": secret_value["DATABASE_PASSWORD"],
-        # "HOST": secret_value["DATABASE_HOST"],
-        # "PORT": secret_value["DATABASE_PORT"],
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -110,25 +76,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
-
-LANGUAGE_CODE = secret_value.get('LANGUAGE', 'en-en')
-
-TIME_ZONE = secret_value.get('TIME', 'UTC')
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_URL = '/static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ==================     Settings Manager Dynaconf     ========================
+# to switch the environment you use:
+# $ export ENV_FOR_DYNACONF=[default | development | productions]
+
+# HERE STARTS DYNACONF EXTENSION LOAD (Keep at the very bottom of settings.py)
+# Read more at https://dynaconf.readthedocs.io/en/latest/guides/django.html
+import dynaconf  # noqa
+
+settings_location = os.path.join(
+    BASE_DIR, 'config/settings.toml,config/.secrets.toml'
+)
+settings = dynaconf.DjangoDynaconf(__name__)  # noqa
+# HERE ENDS DYNACONF EXTENSION LOAD (No more code below this line)

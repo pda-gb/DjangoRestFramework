@@ -12,6 +12,7 @@ markdown = "*"
 toml = "*"
 mimesis = "*"
 psycopg2-binary = "*"
+dynaconf = {extras = ["toml"], version = "*"}
 
 [dev-packages]
 
